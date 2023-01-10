@@ -12,9 +12,9 @@ interface IItem {
 
 const App = () => {
 	const [items, setItems] = useState<IItem[]>([
-		{ itemName: 'carottes', quantity: 4, price: 2 },
-		{ itemName: 'sauce tomate', quantity: 1, price: 4 },
-		{ itemName: 'ps5', quantity: 1, price: 500 },
+		{ itemName: 'Carottes', quantity: 4, price: 2 },
+		{ itemName: 'Sauce tomate', quantity: 1, price: 4 },
+		{ itemName: 'PS5', quantity: 1, price: 500 },
 	]);
   const [newItemName, setNewItemName] = useState<string>('')
   const [total, setTotal] = useState(0)
@@ -114,16 +114,16 @@ const App = () => {
 			<div className='main-container'>
 				<div className='add-item-box'>
 					<input className='add-item-input' value={newItemName} onChange={(event) => setNewItemName(event.target.value)}
-            placeholder='Add an item...' />
+            placeholder='Ajouter un produit...' />
 					<FontAwesomeIcon icon={faPlus} onClick={addItem} />
 				</div>
 				<div className='item-list'>
           <div className='item-container'>
             <div className='item-name'>
-              <span>NAME</span>
+              <span>PRODUIT</span>
             </div>
             <div>
-              <span>QUANTITY & PRICE</span>
+              <span>QUANTITE & PRIX</span>
             </div>
           </div>
 					{items.map(renderItem)}

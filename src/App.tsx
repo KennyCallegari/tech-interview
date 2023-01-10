@@ -19,8 +19,8 @@ import { faChevronRight, faChevronLeft, faPlus } from '@fortawesome/free-solid-s
 
 const App = () => {
 	const [items, setItems] = useState([
-		{ itemName: 'carottes', quantity: 4, price: 2 },
-		{ itemName: 'sauce tomate', quantity: 1, price: 4 },
+		{ itemName: 'Carottes', quantity: 4, price: 2 },
+		{ itemName: 'Sauce tomate', quantity: 1, price: 4 },
 		{ itemName: 'PS5', quantity: 1, price: 500 },
 	]);
 
@@ -54,7 +54,7 @@ const App = () => {
 		<div className='app-background'>
 			<div className='main-container'>
 				<div className='add-item-box'>
-					<input className='add-item-input' value="" placeholder='Add an item...' />
+					<input className='add-item-input' value="" placeholder='Ajouter un produit...' />
 					<FontAwesomeIcon icon={faPlus} />
 				</div>
 				<div className='item-list'>
