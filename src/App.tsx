@@ -17,6 +17,7 @@ import { faChevronRight, faChevronLeft, faPlus } from '@fortawesome/free-solid-s
 // - header: { apikey: "Yfg2yQodgBumwqnQjRHwblfLPR2zFJRQ" }
 
 // coucou
+// bonjour Chloé
 
 const App = () => {
 	const [items, setItems] = useState([
