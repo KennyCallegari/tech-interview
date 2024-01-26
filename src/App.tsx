@@ -16,6 +16,7 @@ import { faChevronRight, faChevronLeft, faPlus } from '@fortawesome/free-solid-s
 // - https://api.apilayer.com/exchangerates_data/convert?to=USD&from=EUR&amount=monTotal
 // - header: { apikey: "Yfg2yQodgBumwqnQjRHwblfLPR2zFJRQ" }
 
+// coucou
 
 const App = () => {
 	const [items, setItems] = useState([
