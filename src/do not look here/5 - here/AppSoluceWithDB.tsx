@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 // voici une liste de course
 // dans cette liste on veut pouvoir :
@@ -20,7 +21,47 @@ const App = () => {
 	const [items, setItems] = useState([]);
 	const [newItem, setNewItem] = useState('');
 
+  const getItems = async () => {
+    const res = await axios.get(`http://localhost:8080/items`);
+
+    setItems(res.data.items)
+  }
+
+  useEffect(() => {
+    getItems()
+  }, [])
+
   const onChangeInput = (e) => { setNewItem(e.target.value) }
+
+  const addItem = async () => {
+    const res = await axios.post(`http://localhost:8080/items`, { name: newItem });
+
+    setItems(res.data.items)
+  }
+
+
+  const changeQuantity = async (index: number, positive: boolean) => {
+    const newQuantity = positive ? items[index].quantity + 1 : items[index].quantity - 1;
+
+    const res = await axios.put(
+      `http://localhost:8080/items/${items[index]._id}`,
+      { quantity: newQuantity }
+    );
+
+    return setItems(res.data.items);
+  }
+
+  const changePrice = async (index: number, positive: boolean) => {
+    const newPrice = positive ? items[index].price + 1 : items[index].price - 1;
+
+    const res = await axios.put(
+      `http://localhost:8080/items/${items[index]._id}`,
+      { price: newPrice }
+    );
+
+    return setItems(res.data.items);
+  }
+
 
   const renderItem = (item: any, index: number) => (
     <div className='item-container' key={index}>
@@ -29,20 +70,20 @@ const App = () => {
       </div>
       <div className='quantity'>
         <button>
-          <FontAwesomeIcon icon={faChevronLeft} />
+          <FontAwesomeIcon icon={faChevronLeft} onClick={() => changeQuantity(index, false)} />
         </button>
         <span> {item.quantity} </span>
         <button>
-          <FontAwesomeIcon icon={faChevronRight} />
+          <FontAwesomeIcon icon={faChevronRight} onClick={() => changeQuantity(index, true)} />
         </button>
       </div>
       <div className='price'>
         <button>
-          <FontAwesomeIcon icon={faChevronLeft}  />
+          <FontAwesomeIcon icon={faChevronLeft}  onClick={() => changePrice(index, false)} />
         </button>
         <span> {item.price} </span>
         <button>
-          <FontAwesomeIcon icon={faChevronRight}  />
+          <FontAwesomeIcon icon={faChevronRight}  onClick={() => changePrice(index, true)} />
         </button>
       </div>
     </div>
@@ -54,7 +95,7 @@ const App = () => {
 				<div className='add-item-box'>
 					<input className='add-item-input' value={newItem} placeholder='Ajouter un produit...'
             onChange={onChangeInput} type="text" />
-					<FontAwesomeIcon icon={faPlus} />
+					<FontAwesomeIcon icon={faPlus} onClick={addItem} />
 				</div>
 				<div className='item-list'>
           <div className='item-container'>
